@@ -155,9 +155,6 @@ GET /api/books
 # Get all books with default pagination
 curl http://localhost:3000/api/books
 
-# Get books with pagination
-curl http://localhost:3000/api/books?page=2&limit=5
-
 # Search books by title
 curl http://localhost:3000/api/books?title=harry
 
