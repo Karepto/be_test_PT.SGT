@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Book {
+  id            String      @id @default(uuid()) @db.Uuid
+  title         String      @db.VarChar(255)
+  author        String      @db.VarChar(255)
+  publishedYear Int         @map("published_year")
+  stock         Int         @default(0)
+  isbn          String      @unique @db.VarChar(13)
+  createdAt     DateTime    @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt     DateTime    @updatedAt @map("updated_at") @db.Timestamp(6)
+  borrowings    Borrowing[]
+
+  @@map("books")
+}
+
+model Member {
+  id         String      @id @default(uuid()) @db.Uuid
+  name       String      @db.VarChar(255)
+  email      String      @unique @db.VarChar(255)
+  phone      String      @db.VarChar(15)
+  address    String      @db.Text
+  createdAt  DateTime    @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt  DateTime    @updatedAt @map("updated_at") @db.Timestamp(6)
+  borrowings Borrowing[]
+
+  @@map("members")
+}
+
+enum BorrowingStatus {
+  BORROWED
+  RETURNED
+}
+
+model Borrowing {
+  id         String          @id @default(uuid()) @db.Uuid
+  bookId     String          @map("book_id") @db.Uuid
+  memberId   String          @map("member_id") @db.Uuid
+  borrowDate DateTime        @map("borrow_date") @db.Date
+  returnDate DateTime?       @map("return_date") @db.Date
+  status     BorrowingStatus @default(BORROWED)
+  createdAt  DateTime        @default(now()) @map("created_at") @db.Timestamp(6)
+  updatedAt  DateTime        @updatedAt @map("updated_at") @db.Timestamp(6)
+
+  book   Book   @relation(fields: [bookId], references: [id])
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@map("borrowings")
+}
