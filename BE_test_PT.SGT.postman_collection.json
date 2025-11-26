@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "981886eb-bd9c-4652-bf6e-2a359ef4868a",
+		"name": "BE_test_PT.SGT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33886137",
+		"_collection_link": "https://sewain-7433.postman.co/workspace/b53895f3-ca2b-4424-8408-7adb0a19a34c/collection/33886137-981886eb-bd9c-4652-bf6e-2a359ef4868a?action=share&source=collection_link&creator=33886137"
+	},
+	"item": [
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Get Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/books",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"books"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Member",
+			"item": [
+				{
+					"name": "Create New Member",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Dani\",\r\n  \"email\": \"dani123@mail.com\",\r\n  \"phone\": \"0876530989\",\r\n  \"address\": \"yogyakarta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/members",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Member Borrowing History",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/members/25bc642a-7875-46c5-b62d-0a478f4ff444/borrowings?status=returned",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"members",
+								"25bc642a-7875-46c5-b62d-0a478f4ff444",
+								"borrowings"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "returned"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Borrow",
+			"item": [
+				{
+					"name": "Create New Borrowings",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"book_id\": \"18128cbc-3c8d-45e2-ab86-961695d89294\",\r\n  \"member_id\": \"25bc642a-7875-46c5-b62d-0a478f4ff444\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/borrowings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"borrowings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrowings Multiple Books",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"book_id\": [\"9c86e816-83cf-4a6c-88d7-f7ff9e46054e\", \"5dd80c65-5676-4796-a13d-e6b8b742c493\"],\r\n  \"member_id\": \"25bc642a-7875-46c5-b62d-0a478f4ff444\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/borrowings",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"borrowings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status Borrowings",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/borrowings/3495288a-a897-46bb-a61c-453aa403d6eb/return",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"borrowings",
+								"3495288a-a897-46bb-a61c-453aa403d6eb",
+								"return"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		}
+	]
+}
