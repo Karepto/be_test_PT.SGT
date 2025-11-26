@@ -15,7 +15,6 @@ const borrowingService = {
       throw new Error('book_id is required');
     }
 
-    // Start a transaction to create borrowing(s) and update book stock
     return await prisma.$transaction(async (tx) => {
       // Check if member exists
       const member = await tx.member.findUnique({

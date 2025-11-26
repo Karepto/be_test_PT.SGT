@@ -1,11 +1,9 @@
-// Member service
 const prisma = require('../config/database');
 
 const memberService = {
   validateMemberData(data) {
     const errors = [];
 
-    // Check required fields
     if (!data.name || data.name.trim() === '') {
       errors.push('Name is required');
     }
@@ -19,7 +17,6 @@ const memberService = {
       errors.push('Address is required');
     }
 
-    // Validate email format
     if (data.email) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(data.email)) {
@@ -27,7 +24,6 @@ const memberService = {
       }
     }
 
-    // Validate phone format (Indonesian format)
     if (data.phone) {
       const phoneRegex = /^(\+62|62|0)[0-9]{9,13}$/;
       if (!phoneRegex.test(data.phone.replace(/[\s-]/g, ''))) {
@@ -45,7 +41,6 @@ const memberService = {
       throw new Error(validationErrors.join(', '));
     }
 
-    // Check email uniqueness
     const existingMember = await this.getMemberByEmail(data.email);
     if (existingMember) {
       throw new Error('Email already exists');
@@ -81,7 +76,6 @@ const memberService = {
       throw new Error('Member not found');
     }
 
-    // Build where clause
     const where = { memberId };
     if (status) {
       where.status = status.toUpperCase();
