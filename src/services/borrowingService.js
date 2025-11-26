@@ -63,7 +63,7 @@ const borrowingService = {
           data: {
             bookId: bookId,
             memberId: data.member_id,
-            borrowDate: new Date(), // Current date
+            borrowDate: new Date(),
             status: 'BORROWED'
           },
           include: {
@@ -115,7 +115,7 @@ const borrowingService = {
         where: { id },
         data: {
           status: 'RETURNED',
-          returnDate: new Date() // Current date
+          returnDate: new Date()
         },
         include: {
           book: true,
