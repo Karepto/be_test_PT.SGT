@@ -1,4 +1,3 @@
-// Borrowing service
 const prisma = require('../config/database');
 
 const borrowingService = {
